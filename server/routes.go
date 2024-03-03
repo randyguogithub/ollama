@@ -673,6 +673,10 @@ func DeleteModelHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, nil)
 }
 
+func PingHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, nil)
+}
+
 func ShowModelHandler(c *gin.Context) {
 	var req api.ShowRequest
 	err := c.ShouldBindJSON(&req)
@@ -957,6 +961,7 @@ func (s *Server) GenerateRoutes() http.Handler {
 	r.POST("/api/show", ShowModelHandler)
 	r.POST("/api/blobs/:digest", CreateBlobHandler)
 	r.HEAD("/api/blobs/:digest", HeadBlobHandler)
+	r.GET("/ping", PingHandler)
 
 	// Compatibility endpoints
 	r.POST("/v1/chat/completions", openai.Middleware(), ChatHandler)
